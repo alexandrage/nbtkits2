@@ -2,14 +2,16 @@ package nbtkits;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftInventoryCustom;
-import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_7_R4.inventory.CraftInventoryCustom;
+import org.bukkit.craftbukkit.v1_7_R4.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import net.minecraft.server.v1_12_R1.NBTCompressedStreamTools;
-import net.minecraft.server.v1_12_R1.NBTTagCompound;
-import net.minecraft.server.v1_12_R1.NBTTagList;
+
+import net.minecraft.server.v1_7_R4.NBTCompressedStreamTools;
+import net.minecraft.server.v1_7_R4.NBTTagCompound;
+import net.minecraft.server.v1_7_R4.NBTTagList;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,7 +23,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import static nbtkits.Message.*;
 
-public class InventoryNBTSer_v1_12_R1 implements InventoryNBTSer {
+public class InventoryNBTSer_v1_7_R4 implements InventoryNBTSer {
 
 	@Override
 	public void setInv(Player p, File folder) throws IOException {
@@ -209,7 +211,7 @@ public class InventoryNBTSer_v1_12_R1 implements InventoryNBTSer {
 			NBTTagCompound inputObject = (NBTTagCompound) itemList.get(i);
 			if (!inputObject.isEmpty()) {
 				inventory.setItem(i,
-						CraftItemStack.asBukkitCopy(new net.minecraft.server.v1_12_R1.ItemStack(inputObject)));
+						CraftItemStack.asBukkitCopy(net.minecraft.server.v1_7_R4.ItemStack.createStack(inputObject)));
 			}
 		}
 		return inventory;
