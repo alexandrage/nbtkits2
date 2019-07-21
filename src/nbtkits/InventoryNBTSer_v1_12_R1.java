@@ -185,7 +185,7 @@ public class InventoryNBTSer_v1_12_R1 implements InventoryNBTSer {
 			if (b) {
 				inventory[i] = null;
 			}
-			CraftItemStack craft = getCraftVersion(inventory[i]);
+			CraftItemStack craft = (CraftItemStack) inventory[i];
 			if (craft != null)
 				CraftItemStack.asNMSCopy(craft).save(outputObject);
 			itemList.add(outputObject);
@@ -213,14 +213,5 @@ public class InventoryNBTSer_v1_12_R1 implements InventoryNBTSer {
 			}
 		}
 		return inventory;
-	}
-
-	private CraftItemStack getCraftVersion(ItemStack stack) {
-		if (stack instanceof CraftItemStack)
-			return (CraftItemStack) stack;
-		else if (stack != null)
-			return CraftItemStack.asCraftCopy(stack);
-		else
-			return null;
 	}
 }

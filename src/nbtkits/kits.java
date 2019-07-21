@@ -21,7 +21,7 @@ public class kits extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		this.inbt = new InventoryNBTSer_v1_12_R1();
+		this.inbt = new InventoryNBTSer_v1_14_R1();
 		getConfig().options().copyDefaults(true);
 		getDataFolder().mkdirs();
 		this.folder.mkdir();

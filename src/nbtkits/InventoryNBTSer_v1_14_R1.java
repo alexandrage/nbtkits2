@@ -2,15 +2,15 @@ package nbtkits;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.craftbukkit.v1_13_R2.inventory.CraftInventoryCustom;
-import org.bukkit.craftbukkit.v1_13_R2.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftInventoryCustom;
+import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import net.minecraft.server.v1_13_R2.NBTCompressedStreamTools;
-import net.minecraft.server.v1_13_R2.NBTTagCompound;
-import net.minecraft.server.v1_13_R2.NBTTagList;
+import net.minecraft.server.v1_14_R1.NBTCompressedStreamTools;
+import net.minecraft.server.v1_14_R1.NBTTagCompound;
+import net.minecraft.server.v1_14_R1.NBTTagList;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import static nbtkits.Message.*;
 
-public class InventoryNBTSer_v1_13_R implements InventoryNBTSer {
+public class InventoryNBTSer_v1_14_R1 implements InventoryNBTSer {
 
 	@Override
 	public void setInv(Player p, File folder) throws IOException {
@@ -187,7 +187,7 @@ public class InventoryNBTSer_v1_13_R implements InventoryNBTSer {
 			if (b) {
 				inventory[i] = null;
 			}
-			CraftItemStack craft = getCraftVersion(inventory[i]);
+			CraftItemStack craft = (CraftItemStack) inventory[i];
 			if (craft != null)
 				CraftItemStack.asNMSCopy(craft).save(outputObject);
 			itemList.add(outputObject);
@@ -210,20 +210,10 @@ public class InventoryNBTSer_v1_13_R implements InventoryNBTSer {
 		for (int i = 0; i < itemList.size(); i++) {
 			NBTTagCompound inputObject = (NBTTagCompound) itemList.get(i);
 			if (!inputObject.isEmpty()) {
-				new net.minecraft.server.v1_13_R2.ItemStack(null);
 				inventory.setItem(i,
-						CraftItemStack.asBukkitCopy(net.minecraft.server.v1_13_R2.ItemStack.a(inputObject)));
+						CraftItemStack.asBukkitCopy(net.minecraft.server.v1_14_R1.ItemStack.a(inputObject)));
 			}
 		}
 		return inventory;
-	}
-
-	private CraftItemStack getCraftVersion(ItemStack stack) {
-		if (stack instanceof CraftItemStack)
-			return (CraftItemStack) stack;
-		else if (stack != null)
-			return CraftItemStack.asCraftCopy(stack);
-		else
-			return null;
 	}
 }
