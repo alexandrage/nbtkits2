@@ -8,7 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
 import static nbtkits.Permissions.*;
 
 public class Death implements Listener {
@@ -25,20 +24,11 @@ public class Death implements Listener {
 	public void onDeath(PlayerDeathEvent e) throws IOException {
 		Player p = e.getEntity();
 		if (p.hasPermission(deathinv)) {
-			this.inbt.setInv(p, this.folder);
-			e.getDrops().clear();
+			e.setKeepInventory(true);
 		}
 		if (p.hasPermission(deathexp)) {
 			e.setKeepLevel(true);
 			e.setDroppedExp(0);
-		}
-	}
-
-	@EventHandler
-	public void onRespawn(PlayerRespawnEvent e) throws IOException {
-		Player p = e.getPlayer();
-		if (p.hasPermission(deathinv)) {
-			this.inbt.getInv(p, this.folder);
 		}
 	}
 

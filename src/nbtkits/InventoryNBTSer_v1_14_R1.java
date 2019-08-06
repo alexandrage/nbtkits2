@@ -216,4 +216,14 @@ public class InventoryNBTSer_v1_14_R1 implements InventoryNBTSer {
 		}
 		return inventory;
 	}
+	
+	@Override
+	public void explode(Player p) {
+		p.playSound((p).getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 2);
+	}
+
+	@Override
+	public void openchest(Player p) {
+		p.playSound((p).getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 1);
+	}
 }

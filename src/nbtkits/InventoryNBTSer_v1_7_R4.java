@@ -66,7 +66,7 @@ public class InventoryNBTSer_v1_7_R4 implements InventoryNBTSer {
 	public void getKit(Player p, File folder, String name, boolean b) {
 		if (!new File(folder + "/kits/" + name.toLowerCase() + ".kit").exists()) {
 			p.sendMessage(kitsNo);
-			p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 2);
+			p.playSound(p.getLocation(), Sound.EXPLODE, 1, 2);
 			return;
 		}
 		NBTTagCompound NBT = fromNBTTagCompound(folder + "/kits/" + name.toLowerCase() + ".kit");
@@ -81,7 +81,7 @@ public class InventoryNBTSer_v1_7_R4 implements InventoryNBTSer {
 				Time t = new Time(time - calc);
 				if (calc < time) {
 					p.sendMessage(kitsTmp + t.getFormat());
-					p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_BREAK, 1, 0);
+					p.playSound(p.getLocation(), Sound.ANVIL_BREAK, 1, 0);
 					return;
 				}
 			}
@@ -97,7 +97,7 @@ public class InventoryNBTSer_v1_7_R4 implements InventoryNBTSer {
 			}
 		}
 		p.sendMessage(kitsGive + name.toLowerCase());
-		p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 0);
+		p.playSound(p.getLocation(), Sound.ANVIL_LAND, 1, 0);
 		new File(folder + "/players/").mkdirs();
 		NBTTagCompound temp = new NBTTagCompound();
 		temp.setLong("time", System.currentTimeMillis());
@@ -123,7 +123,7 @@ public class InventoryNBTSer_v1_7_R4 implements InventoryNBTSer {
 			NBTCompressedStreamTools.a(NBT, stream);
 			stream.close();
 			p.sendMessage(kitsSave);
-			p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 1, 1);
+			p.playSound(p.getLocation(), Sound.ANVIL_LAND, 1, 1);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -133,7 +133,7 @@ public class InventoryNBTSer_v1_7_R4 implements InventoryNBTSer {
 	public void setTime(Player p, File folder, String name, long time) {
 		if (!new File(folder + "/kits/" + name.toLowerCase() + ".kit").exists()) {
 			p.sendMessage(kitsNo);
-			p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 2);
+			p.playSound(p.getLocation(), Sound.EXPLODE, 1, 2);
 			return;
 		}
 		NBTTagCompound NBT = fromNBTTagCompound(folder + "/kits/" + name.toLowerCase() + ".kit");
@@ -143,7 +143,7 @@ public class InventoryNBTSer_v1_7_R4 implements InventoryNBTSer {
 			NBTCompressedStreamTools.a(NBT, stream);
 			stream.close();
 			p.sendMessage(timeChange);
-			p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 1, 1);
+			p.playSound(p.getLocation(), Sound.ANVIL_LAND, 1, 1);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -155,10 +155,10 @@ public class InventoryNBTSer_v1_7_R4 implements InventoryNBTSer {
 		if (k.exists()) {
 			k.delete();
 			p.sendMessage(kitsdell);
-			p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 1, 1);
+			p.playSound(p.getLocation(), Sound.ANVIL_LAND, 1, 1);
 		} else {
 			p.sendMessage(kitsNo);
-			p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 0);
+			p.playSound(p.getLocation(), Sound.EXPLODE, 1, 0);
 		}
 	}
 
@@ -215,5 +215,15 @@ public class InventoryNBTSer_v1_7_R4 implements InventoryNBTSer {
 			}
 		}
 		return inventory;
+	}
+
+	@Override
+	public void explode(Player p) {
+		p.playSound((p).getLocation(), Sound.EXPLODE, 1, 2);
+	}
+
+	@Override
+	public void openchest(Player p) {
+		p.playSound((p).getLocation(), Sound.CHEST_OPEN, 1, 1);
 	}
 }

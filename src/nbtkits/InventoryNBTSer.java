@@ -20,4 +20,8 @@ public interface InventoryNBTSer {
 	public void delKit(File folder, String name, Player p);
 
 	public List<String> getLogs(File folder);
+	
+	public void explode(Player p);
+	
+	public void openchest(Player p);
 }

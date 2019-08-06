@@ -4,3 +4,9 @@ version: 2.0
 commands:
     kit:
     kits:
+    createkit:
+    createkits:
+    delkit:
+    delkits:
+    timekit:
+    timekits:
